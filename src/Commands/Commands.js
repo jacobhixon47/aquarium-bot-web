@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import fire from '../fire.js';
 import firestore from 'firebase/firestore';
+let fs = fire.firestore();
+fs.enablePersistence();
 
 class Commands extends Component {
   constructor(props) {
@@ -13,15 +15,18 @@ class Commands extends Component {
 
   }
   componentDidMount() {
-    let fs = fire.firestore();
-    fs.enablePersistence();
     let commandsRef = fs.collection(`channels/${this.state.username}/commands`);
+    let prevCommands = this.state.commands;
     commandsRef.get()
         .then(snapshot => {
             snapshot.forEach(doc => {
-              this.setState({
-                commands: [...this.state.commands, doc.data().name]
+              prevCommands.push({
+                name: doc.data().name,
+                text: doc.data().text
               });
+            });
+            this.setState({
+              commands: prevCommands
             });
         })
         .catch(err => {
@@ -32,7 +37,7 @@ class Commands extends Component {
   render() {
     var commandsList = this.state.commands.map(command => {
       return (
-        <p>{command}</p>
+        <p key={command.name}>{command.name}</p>
       );
     });
     return (
