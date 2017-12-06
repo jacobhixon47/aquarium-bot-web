@@ -1,0 +1,26 @@
+.inner-addon {
+  position: relative;
+}
+.inner-addon .icon {
+  color: black;
+  position: absolute;
+  pointer-events: none;
+  padding: 8px;
+  background-color: #ccc;
+  /*border-radius: 10px 0px 0px 10px;*/
+}
+
+.inner-addon input {
+  width: 200px;
+  padding: 9px 9px 10px 25px;
+  /*border-radius: 10px;*/
+  border: 1px #ccc solid;
+}
+
+.text {
+  padding: 15px;
+  height: 50px;
+  width: 200px;
+  /*border-radius: 10px;*/
+  border: 1px #ccc solid;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CommandsForm from '../CommandsForm/CommandsForm.js';
 import fire from '../fire.js';
 import firestore from 'firebase/firestore';
 let fs = fire.firestore();
@@ -11,37 +12,37 @@ class Commands extends Component {
       username: "47aquarian",
       commands: []
     };
-    this.componentDidMount = this.componentDidMount.bind(this);
-
+    this.commandsRef = fs.collection(`channels/${this.state.username}/commands`);
   }
+
   componentDidMount() {
-    let commandsRef = fs.collection(`channels/${this.state.username}/commands`);
-    let prevCommands = this.state.commands;
-    commandsRef.get()
-        .then(snapshot => {
-            snapshot.forEach(doc => {
-              prevCommands.push({
-                name: doc.data().name,
-                text: doc.data().text
-              });
-            });
-            this.setState({
-              commands: prevCommands
-            });
-        })
-        .catch(err => {
-            console.log('Error getting documents', err);
+    let prevCommands = [];
+    this.commandsRef.onSnapshot(snapshot => {
+      console.log("recieved snapshot...");
+      snapshot.forEach(doc => {
+        console.log(doc.data().name);
+        prevCommands.push({
+          name: doc.data().name,
+          text: doc.data().text
         });
+      });
+      this.setState({
+        commands: prevCommands
+      });
+    })
   }
 
   render() {
-    var commandsList = this.state.commands.map(command => {
+    let commandsList = this.state.commands.map(command => {
       return (
-        <p key={command.name}>{command.name}</p>
+        <p key={command.name}>{command.name}: {command.text}</p>
       );
     });
     return (
-      <div className="Commands">
+      <div className="Commands" style={{
+        padding: "1%"
+      }}>
+        <CommandsForm />
         <h3>Commands</h3>
         <div>{commandsList}</div>
       </div>
