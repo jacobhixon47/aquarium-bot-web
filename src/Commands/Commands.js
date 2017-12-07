@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import CommandsForm from '../CommandsForm/CommandsForm.js';
 import fire from '../fire.js';
 import firestore from 'firebase/firestore';
+import './Commands.css';
+
 let fs = fire.firestore();
 fs.enablePersistence();
 
@@ -39,11 +41,19 @@ class Commands extends Component {
     });
     return (
       <div className="Commands" style={{
-        padding: "1%"
+        padding: "1%",
+        width: "100vw"
       }}>
-        <CommandsForm />
-        <h3>Commands</h3>
-        <div>{commandsList}</div>
+        <div style={{
+          maxWidth: "50vw",
+          textAlign: "left"
+        }}>
+          <h3>Commands</h3>
+          <div>{commandsList}</div>
+        </div>
+        <CommandsForm style={{
+          maxWidth: "50vw"
+        }}/>
       </div>
     );
   }

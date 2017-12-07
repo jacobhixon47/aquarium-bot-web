@@ -38,6 +38,7 @@ class CommandsForm extends Component {
   render() {
     return (
       <div className="CommandsForm">
+        <h3>Add Command</h3>
         <div className="inner-addon">
           <span className="icon">!</span>
           <input name="name" type="text" value={this.state.name} onChange={this.handleNameChange} placeholder="command"/>
@@ -46,7 +47,7 @@ class CommandsForm extends Component {
           <textarea name="text" type="text" className="text" value={this.state.text} onChange={this.handleTextChange} placeholder="text"/>
         </p>
         <p>
-          <button onClick={this.handleSaveClick}>Save Command</button>
+          <button onClick={this.handleSaveClick} className="basicButton">Save Command</button>
         </p>
       </div>
     );

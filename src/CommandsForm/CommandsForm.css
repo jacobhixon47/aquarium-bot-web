@@ -7,20 +7,32 @@
   pointer-events: none;
   padding: 8px;
   background-color: #ccc;
-  /*border-radius: 10px 0px 0px 10px;*/
 }
 
 .inner-addon input {
-  width: 200px;
+  width: 20vw;
   padding: 9px 9px 10px 25px;
-  /*border-radius: 10px;*/
-  border: 1px #ccc solid;
+  border: 1px #bbb solid;
 }
 
 .text {
   padding: 15px;
   height: 50px;
-  width: 200px;
-  /*border-radius: 10px;*/
-  border: 1px #ccc solid;
+  width: 20vw;
+  border: 1px #bbb solid;
+}
+
+.basicButton {
+  min-width: 22vw;
+  height: 30px;
+  border-radius: 15px;
+  border: 1px #bbb solid;
+  background-color: #fff;
+  transition: all 0.5s ease;
+}
+
+.basicButton:hover {
+  cursor: pointer;
+  background-color: #bbb;
+  color: #fff;
 }
