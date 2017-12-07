@@ -16,11 +16,10 @@ class Commands extends Component {
   }
 
   componentDidMount() {
-    let prevCommands = [];
     this.commandsRef.onSnapshot(snapshot => {
-      console.log("recieved snapshot...");
+      let prevCommands = [];
+      console.log("SNAPSHOT");
       snapshot.forEach(doc => {
-        console.log(doc.data().name);
         prevCommands.push({
           name: doc.data().name,
           text: doc.data().text
