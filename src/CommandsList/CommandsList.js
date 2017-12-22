@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import CommandsForm from '../CommandsForm/CommandsForm.js';
 import fire from '../fire.js';
 import firestore from 'firebase/firestore';
-import './Commands.css';
+import './CommandsList.css';
 
 let fs = fire.firestore();
 fs.enablePersistence();
 
-class Commands extends Component {
+class CommandsList extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -59,4 +59,4 @@ class Commands extends Component {
   }
 }
 
-export default Commands;
+export default CommandsList;

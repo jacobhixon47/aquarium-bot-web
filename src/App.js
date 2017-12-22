@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Commands from './Commands/Commands.js';
+import CommandsList from './CommandsList/CommandsList.js';
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">AquariumBot v0.1</h1>
         </header>
-        <Commands />
+        <CommandsList />
       </div>
     );
   }
