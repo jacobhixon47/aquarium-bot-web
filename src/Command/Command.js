@@ -9,28 +9,61 @@ class Command extends Component {
       text: props.text,
       id: props.id
     };
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.handleEditClick = this.handleEditClick.bind(this);
   }
 
   handleDeleteClick() {
-    props.handleDelete(id);
+    this.props.handleDelete(this.state.name);
   }
 
-  handleEditClick(id) {
-    props.handleEdit(id);
+  handleEditClick() {
+    this.props.handleEdit(this.state.name);
   }
 
   render() {
     return (
       <div className="Command" style={{
         padding: "1%",
-        width: "50vw"
+        width: "50vw",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around",
+        border: "1px solid #000",
+        marginTop: "1vh",
+        marginBottom: "2vh",
       }}>
-        <div key={this.state.name}>{this.state.name}: {this.state.text}</div>
-        <button onClick={this.handleEditClick(this.state.id)}>Edit</button>
-        <button onClick={this.handleDeleteClick(this.state.id)}>Delete</button>
+        <div key={this.state.name} style={{
+          width: "8vw"
+        }}>{this.state.name}</div>
+        <div style={{
+          width: "30vw"
+        }}>{this.state.text}</div>
+        <div className="buttonsSection" style={{
+          width: "8vw",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingTop: "1%",
+          paddingBottom: "1%"
+        }}>
+          <button onClick={this.handleEditClick} style={{
+            width: "8vw",
+            padding: "3%",
+            marginTop: "3%",
+            marginBottom: "3%"
+          }}>Edit</button>
+          <button onClick={this.handleDeleteClick} style={{
+            width: "8vw",
+            padding: "3%",
+            marginTop: "3%",
+            marginBottom: "3%"
+          }}>Delete</button>
+        </div>
       </div>
     );
   }
 }
 
-export default CommandsList;
+export default Command;

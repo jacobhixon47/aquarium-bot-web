@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CommandsForm from '../CommandsForm/CommandsForm.js';
+import Command from '../Command/Command.js';
 import fire from '../fire.js';
-import firestore from 'firebase/firestore';
 import './CommandsList.css';
 
 let fs = fire.firestore();
@@ -15,6 +15,14 @@ class CommandsList extends Component {
       commands: []
     };
     this.commandsRef = fs.collection(`channels/${this.state.username}/commands`);
+  }
+
+  handleEdit(name) {
+    alert("EDIT?");
+  }
+
+  handleDelete(name) {
+    alert("DELETE?");
   }
 
   componentDidMount() {
@@ -36,13 +44,16 @@ class CommandsList extends Component {
   render() {
     let commandsList = this.state.commands.map(command => {
       return (
-        <p key={command.name}>{command.name}: {command.text}</p>
+        <Command key={command.name} name={command.name} text={command.text} id={command.id} handleEdit={this.handleEdit.bind(this)} handleDelete={this.handleDelete.bind(this)}/>
       );
     });
     return (
       <div className="Commands" style={{
         padding: "1%",
-        width: "100vw"
+        width: "100vw",
+        display: "flex",
+        alignItems: "flex-start",
+        justifyContent: "space-around"
       }}>
         <div style={{
           maxWidth: "50vw",
