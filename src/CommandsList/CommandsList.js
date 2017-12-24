@@ -72,7 +72,14 @@ class CommandsList extends Component {
   render() {
     let commandsList = this.state.commands.map(command => {
       return (
-        <Command key={command.name} name={command.name} text={command.text} id={command.id} handleEdit={this.handleEdit.bind(this)} handleDelete={this.handleDelete.bind(this)}/>
+        <Command
+          key={command.name}
+          name={command.name}
+          text={command.text}
+          id={command.id}
+          // handleEdit={this.handleEdit.bind(this)}
+          handleDelete={this.handleDelete.bind(this)}
+        />
       );
     });
     return (
