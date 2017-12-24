@@ -18,11 +18,30 @@ class CommandsList extends Component {
   }
 
   handleEdit(name) {
-    alert("EDIT?");
+    this.commandsRef.where('name', '==', name).delete().then(() => {
+      console.log("successfully deleted!");
+
+    }).catch(function(error) {
+      console.error("Error removing document: ", error);
+    });
   }
 
   handleDelete(name) {
-    alert("DELETE?");
+    this.commandsRef.where("name", "==", name)
+    .get()
+    .then(querySnapshot => {
+        querySnapshot.forEach((doc) => {
+          doc.ref.delete().then(() => {
+            console.log("Document successfully deleted!");
+          }).catch(function(error) {
+            console.error("Error removing document: ", error);
+          });
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+
   }
 
   componentDidMount() {
