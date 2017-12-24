@@ -17,14 +17,23 @@ class CommandsList extends Component {
     this.commandsRef = fs.collection(`channels/${this.state.username}/commands`);
   }
 
-  handleEdit(name) {
-    this.commandsRef.where('name', '==', name).delete().then(() => {
-      console.log("successfully deleted!");
-
-    }).catch(function(error) {
-      console.error("Error removing document: ", error);
-    });
-  }
+  // handleEdit(name, newName, newText) {
+  //   this.commandsRef.where("name", "==", name)
+  //   .get()
+  //   .then(querySnapshot => {
+  //     querySnapshot.forEach(doc => {
+  //       doc.ref.update({
+  //       name: name,
+  //       text: newText
+  //     })
+  //     .then(function() {
+  //       console.log("Document successfully updated!");
+  //     });
+  //   }).catch(function(error) {
+  //     // The document probably doesn't exist.
+  //     console.error("Error updating document: ", error);
+  //   });
+  // }
 
   handleDelete(name) {
     this.commandsRef.where("name", "==", name)

@@ -18,7 +18,7 @@ class Command extends Component {
   }
 
   handleEditClick() {
-    this.props.handleEdit(this.state.name);
+    // this.props.handleEdit(this.state.name, this.props.newName, this.props.newText);
   }
 
   render() {
