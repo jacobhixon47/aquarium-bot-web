@@ -7,7 +7,8 @@ class Command extends Component {
     this.state = {
       name: props.name,
       text: props.text,
-      id: props.id
+      id: props.id,
+      showEdit: false
     };
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
     this.handleEditClick = this.handleEditClick.bind(this);
@@ -19,6 +20,9 @@ class Command extends Component {
 
   handleEditClick() {
     // this.props.handleEdit(this.state.name, this.props.newName, this.props.newText);
+    this.setState({
+      showEdit: !this.state.showEdit
+    });
   }
 
   render() {
@@ -61,6 +65,11 @@ class Command extends Component {
             marginBottom: "3%"
           }}>Delete</button>
         </div>
+        {/* {this.state.showPopup ? 
+          <Popup
+            text='Close Me'
+            closePopup={this.togglePopup.bind(this)}
+        /> */}
       </div>
     );
   }
