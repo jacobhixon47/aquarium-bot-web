@@ -28,6 +28,10 @@ class MyModal extends Component {
     this.state.createClick(name, text);
   }
 
+  componentDidMount(name, text) {
+    console.log("MODAL DID MOUNT: " + name + " " + text);
+  }
+
   // Semantic-UI Modal does not mount and unmount on show/hide, and this is causing a bug:
   // The state attributes "name" and "text" are not being updated for the Modal after a command is edited and successfully updated.
 
@@ -46,6 +50,8 @@ class MyModal extends Component {
     } else if (this.state.create && !this.state.delete && !this.state.edit) {
       modalTrigger = <Button fluid><Icon name='add' /></Button>;
       commandForm = <CommandsForm create={true} createClick={this.handleCreateClick}/>;
+    } else {
+      modalTrigger = <Button fluid>Button</Button>;
     }
     return (
       <Modal trigger={modalTrigger} basic size='small'>
