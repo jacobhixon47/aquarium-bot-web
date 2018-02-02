@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Input, TextArea, Button } from 'semantic-ui-react';
 import fire from '../fire.js';
 import firestore from 'firebase/firestore';
 import './CommandsForm.css';
+import 'semantic-ui-css/semantic.min.css';
 
 let fs = fire.firestore();
 
@@ -11,11 +13,14 @@ class CommandsForm extends Component {
     this.state = {
       username: "47aquarian",
       name: "",
-      text: ""
+      text: "",
+      create: props.create,
+      update: props.update
     }
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleTextChange = this.handleTextChange.bind(this);
-    this.handleSaveClick = this.handleSaveClick.bind(this);
+    this.handleCreateClick = this.handleCreateClick.bind(this);
+    this.handleUpdateClick = this.handleUpdateClick.bind(this);
   }
   handleNameChange(event) {
     this.setState({name: event.target.value})
@@ -25,7 +30,21 @@ class CommandsForm extends Component {
     this.setState({text: event.target.value})
   }
 
-  handleSaveClick() {
+  handleUpdateClick() {
+    // let commandsRef = fs.collection(`channels/${this.state.username}/commands`);
+    // commandsRef.add({
+    //   name: "!" + this.state.name,
+    //   text: this.state.text
+    // }).then(ref => {
+    //     console.log('Added document with ID: ', ref.id);
+    // });
+    // this.setState({
+    //   name: "",
+    //   text: ""
+    // });
+  }
+
+  handleCreateClick() {
     let commandsRef = fs.collection(`channels/${this.state.username}/commands`);
     commandsRef.add({
       name: "!" + this.state.name,
@@ -33,22 +52,36 @@ class CommandsForm extends Component {
     }).then(ref => {
         console.log('Added document with ID: ', ref.id);
     });
+    this.setState({
+      name: "",
+      text: ""
+    });
   }
 
   render() {
+    let saveButton;
+    if (this.state.create && !this.state.update) {
+      saveButton = <Button fluid onClick={this.handleCreateClick} primary>Save Command</Button>;
+    } else if (this.state.update && !this.state.create) {
+      saveButton = <Button fluid onClick={this.handleUpdateClick} primary>Save Command</Button>;
+    }
     return (
-      <div className="CommandsForm">
+      <div style={{
+        width: "35vw"
+      }}>
         <h3>Add Command</h3>
-        <div className="inner-addon">
-          <span className="icon">!</span>
-          <input name="name" type="text" value={this.state.name} onChange={this.handleNameChange} placeholder="command"/>
+        <div>
+          <Input fluid={true} icon='warning' iconPosition='left' value={this.state.name} onChange={this.handleNameChange} placeholder='Command Name' />
         </div>
-        <p>
-          <textarea name="text" type="text" className="text" value={this.state.text} onChange={this.handleTextChange} placeholder="text"/>
-        </p>
-        <p>
-          <button onClick={this.handleSaveClick} className="basicButton">Save Command</button>
-        </p>
+        <div>
+          <TextArea value={this.state.text} onChange={this.handleTextChange} placeholder="Command Text" style={{
+            width: "100%",
+            marginTop: "10px",
+            marginBottom: "10px",
+            padding: "3%"
+          }}/>
+        </div>
+        {saveButton}
       </div>
     );
   }

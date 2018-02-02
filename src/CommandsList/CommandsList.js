@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CommandsForm from '../CommandsForm/CommandsForm.js';
 import Command from '../Command/Command.js';
+import MyModal from '../Modal/Modal.js';
 import fire from '../fire.js';
 import './CommandsList.css';
 
@@ -36,6 +37,7 @@ class CommandsList extends Component {
   // }
 
   handleDelete(name) {
+    console.log("deleting '" + name + "'");
     this.commandsRef.where("name", "==", name)
     .get()
     .then(querySnapshot => {
@@ -91,15 +93,15 @@ class CommandsList extends Component {
         justifyContent: "space-around"
       }}>
         <div style={{
-          maxWidth: "50vw",
-          textAlign: "left"
+          textAlign: "center"
         }}>
           <h3>Commands</h3>
+          <MyModal create={true} />
           <div>{commandsList}</div>
         </div>
-        <CommandsForm style={{
+        {/* <CommandsForm style={{
           maxWidth: "50vw"
-        }}/>
+        }}/> */}
       </div>
     );
   }

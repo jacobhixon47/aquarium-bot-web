@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MyModal from '../Modal/Modal.js';
 import './Command.css';
 
 class Command extends Component {
@@ -52,24 +53,9 @@ class Command extends Component {
           paddingTop: "1%",
           paddingBottom: "1%"
         }}>
-          <button onClick={this.handleEditClick} style={{
-            width: "8vw",
-            padding: "3%",
-            marginTop: "3%",
-            marginBottom: "3%"
-          }}>Edit</button>
-          <button onClick={this.handleDeleteClick} style={{
-            width: "8vw",
-            padding: "3%",
-            marginTop: "3%",
-            marginBottom: "3%"
-          }}>Delete</button>
+          <MyModal edit={true} />
+          <MyModal delete={true} />
         </div>
-        {/* {this.state.showPopup ? 
-          <Popup
-            text='Close Me'
-            closePopup={this.togglePopup.bind(this)}
-        /> */}
       </div>
     );
   }
