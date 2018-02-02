@@ -18,24 +18,6 @@ class CommandsList extends Component {
     this.commandsRef = fs.collection(`channels/${this.state.username}/commands`);
   }
 
-  // handleEdit(name, newName, newText) {
-  //   this.commandsRef.where("name", "==", name)
-  //   .get()
-  //   .then(querySnapshot => {
-  //     querySnapshot.forEach(doc => {
-  //       doc.ref.update({
-  //       name: name,
-  //       text: newText
-  //     })
-  //     .then(function() {
-  //       console.log("Document successfully updated!");
-  //     });
-  //   }).catch(function(error) {
-  //     // The document probably doesn't exist.
-  //     console.error("Error updating document: ", error);
-  //   });
-  // }
-
   handleDelete(name) {
     console.log("deleting '" + name + "'");
     this.commandsRef.where("name", "==", name)
@@ -68,7 +50,7 @@ class CommandsList extends Component {
       this.setState({
         commands: prevCommands
       });
-    })
+    });
   }
 
   render() {
@@ -93,7 +75,7 @@ class CommandsList extends Component {
         justifyContent: "space-around"
       }}>
         <div style={{
-          textAlign: "center"
+          textAlign: "left"
         }}>
           <h3>Commands</h3>
           <MyModal create={true} />

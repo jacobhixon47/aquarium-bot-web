@@ -8,22 +8,26 @@ class Command extends Component {
     this.state = {
       name: props.name,
       text: props.text,
-      id: props.id,
-      showEdit: false
+      id: props.id
     };
-    this.handleDeleteClick = this.handleDeleteClick.bind(this);
-    this.handleEditClick = this.handleEditClick.bind(this);
+    // this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.handleUpdateClick = this.handleUpdateClick.bind(this);
   }
-
-  handleDeleteClick() {
-    this.props.handleDelete(this.state.name);
-  }
-
-  handleEditClick() {
-    // this.props.handleEdit(this.state.name, this.props.newName, this.props.newText);
+  //
+  // handleDeleteClick() {
+  //   this.props.handleDelete(this.state.name);
+  // }
+  //
+  handleUpdateClick(name, text) {
+    console.log("bubble update => command")
     this.setState({
-      showEdit: !this.state.showEdit
+      name: name,
+      text: text
     });
+  }
+
+  componentDidUpdate() {
+    console.log("COMMAND DID UPDATE: " + this.state.text);
   }
 
   render() {
@@ -53,7 +57,7 @@ class Command extends Component {
           paddingTop: "1%",
           paddingBottom: "1%"
         }}>
-          <MyModal edit={true} />
+          <MyModal edit={true} name={this.state.name} text={this.state.text} updateClick={this.handleUpdateClick}/>
           <MyModal delete={true} />
         </div>
       </div>
