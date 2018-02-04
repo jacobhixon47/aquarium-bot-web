@@ -46,7 +46,7 @@ class CommandForm extends Component {
     this.commandsRef.doc(this.state.name).set({
       name: "!" + this.state.name,
       text: this.state.text
-    }).then(function() {
+    }).then(() => {
       console.log("Document successfully written!");
     }).catch(function(error) {
       console.error("Error writing document: ", error);

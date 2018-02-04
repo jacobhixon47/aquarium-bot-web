@@ -7,7 +7,6 @@ import fire from '../fire.js';
 import './CommandsList.css';
 
 let fs = fire.firestore();
-fs.enablePersistence();
 
 class CommandsList extends Component {
   constructor(props) {
@@ -16,11 +15,10 @@ class CommandsList extends Component {
       username: "47aquarian",
       commands: []
     };
-    this.handleDelete = this.handleDelete.bind(this);
+    this.commandsRef = fs.collection(`channels/${this.state.username}/commands`);
+
     this.updateCommandList = this.updateCommandList.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
-
-    this.commandsRef = fs.collection(`channels/${this.state.username}/commands`);
   }
   updateCommandList() {
     this.commandsRef.onSnapshot(snapshot => {
@@ -40,16 +38,6 @@ class CommandsList extends Component {
     });
   }
 
-  handleDelete(name) {
-    console.log("deleting '" + name.substr(1) + "'");
-    this.commandsRef.doc(name.substr(1)).delete()
-    .then(() => {
-      console.log("Document successfully deleted!");
-    }).catch(function(error) {
-      console.error("Error removing document: ", error);
-    });
-  }
-
   componentDidMount() {
     this.updateCommandList();
   }
@@ -65,7 +53,6 @@ class CommandsList extends Component {
           name={command.name}
           text={command.text}
           id={command.id}
-          handleDelete={this.handleDelete}
           updateCommandList={this.updateCommandList}
         />
       );

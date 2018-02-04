@@ -2,19 +2,25 @@ import React, { Component } from 'react';
 import {Button, Confirm} from 'semantic-ui-react';
 import MyModal from '../MyModal/MyModal.js';
 import CommandForm from '../CommandForm/CommandForm.js';
+import fire from '../fire.js';
 import './Command.css';
+
+let fs = fire.firestore();
+fs.enablePersistence();
 
 class Command extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: '47aquarian',
       name: props.name,
       text: props.text,
       id: props.id,
-      handleDelete: props.handleDelete,
       showConfirmDelete: false,
       updateCommandList: props.updateCommandList
     };
+    this.commandsRef = fs.collection(`channels/${this.state.username}/commands`);
+
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
     this.updateCommandList = this.updateCommandList.bind(this);
     this.handleDeleteConfirm = this.handleDeleteConfirm.bind(this);
@@ -24,8 +30,14 @@ class Command extends Component {
   handleDeleteClick = () => this.setState({showConfirmDelete: true});
   handleDeleteCancel = () => this.setState({showConfirmDelete: false});
   handleDeleteConfirm = () => {
-    console.log('HANDLE DELETE => ' + this.state.name);
-    this.state.handleDelete(this.state.name);
+    console.log("deleting '" + this.state.name.substr(1) + "'");
+    this.commandsRef.doc(this.state.name.substr(1)).delete()
+    .then(() => {
+      console.log("Document successfully deleted!");
+    }).catch(function(error) {
+      console.error("Error removing document: ", error);
+    });
+    this.setState({showConfirmDelete: false});
   }
 
   updateCommandList() {
@@ -71,7 +83,7 @@ class Command extends Component {
           paddingTop: "1%",
           paddingBottom: "1%"
         }}>
-          <MyModal trigger={editModalTrigger} content={editModalContent}/>
+          <MyModal trigger={editModalTrigger} content={editModalContent} />
           <div>
             <Button negative onClick={this.handleDeleteClick} icon='trash outline'/>
             <Confirm
