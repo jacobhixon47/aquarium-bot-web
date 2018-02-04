@@ -45,7 +45,6 @@ class CommandsList extends Component {
     this.commandsRef.doc(name.substr(1)).delete()
     .then(() => {
       console.log("Document successfully deleted!");
-      // this.updateCommandList();
     }).catch(function(error) {
       console.error("Error removing document: ", error);
     });

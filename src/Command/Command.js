@@ -34,7 +34,6 @@ class Command extends Component {
 
   render() {
     let editModalTrigger = <Button icon='edit' />;
-    let deleteModalTrigger = <Button negative icon='trash outline' />
 
     let editModalContent = (
       <CommandForm

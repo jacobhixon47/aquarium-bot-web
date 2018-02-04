@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Input, TextArea, Button } from 'semantic-ui-react';
 import fire from '../fire.js';
-import firestore from 'firebase/firestore';
+import {firestore} from 'firebase/firestore';
 import './CommandForm.css';
 import 'semantic-ui-css/semantic.min.css';
 
@@ -34,7 +34,7 @@ class CommandForm extends Component {
   }
 
   handleSaveClick() {
-    if (this.state.initialName && this.state.initialName !== this.state.name) {
+    if (this.state.initialName) {
       this.commandsRef.doc(this.state.initialName).delete()
       .then(() => {
         console.log("Deleted old command ref: " + this.state.initialName);
@@ -48,10 +48,11 @@ class CommandForm extends Component {
       text: this.state.text
     }).then(function() {
       console.log("Document successfully written!");
-    }.bind(this)).catch(function(error) {
+    }).catch(function(error) {
       console.error("Error writing document: ", error);
     });
   }
+
   render() {
     return (
       <div className="CommandForm" style={{

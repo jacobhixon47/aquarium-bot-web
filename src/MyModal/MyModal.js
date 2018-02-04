@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Modal, Header, Button, Icon} from 'semantic-ui-react';
-import CommandForm from '../CommandForm/CommandForm.js';
+import {Modal} from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './MyModal.css';
 
