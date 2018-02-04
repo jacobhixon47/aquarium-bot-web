@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import MyModal from '../Modal/Modal.js';
+import {Button, Confirm} from 'semantic-ui-react';
+import MyModal from '../MyModal/MyModal.js';
+import CommandForm from '../CommandForm/CommandForm.js';
 import './Command.css';
 
 class Command extends Component {
@@ -8,29 +10,42 @@ class Command extends Component {
     this.state = {
       name: props.name,
       text: props.text,
-      id: props.id
+      id: props.id,
+      handleDelete: props.handleDelete,
+      showConfirmDelete: false,
+      updateCommandList: props.updateCommandList
     };
-    // this.handleDeleteClick = this.handleDeleteClick.bind(this);
-    this.handleUpdateClick = this.handleUpdateClick.bind(this);
-  }
-  //
-  // handleDeleteClick() {
-  //   this.props.handleDelete(this.state.name);
-  // }
-  //
-  handleUpdateClick(name, text) {
-    console.log("bubble update => command")
-    this.setState({
-      name: name,
-      text: text
-    });
+    this.handleDeleteClick = this.handleDeleteClick.bind(this);
+    this.updateCommandList = this.updateCommandList.bind(this);
+    this.handleDeleteConfirm = this.handleDeleteConfirm.bind(this);
+    this.handleDeleteCancel = this.handleDeleteCancel.bind(this);
   }
 
-  componentDidUpdate() {
-    console.log("COMMAND DID UPDATE: " + this.state.text);
+  handleDeleteClick = () => this.setState({showConfirmDelete: true});
+  handleDeleteCancel = () => this.setState({showConfirmDelete: false});
+  handleDeleteConfirm = () => {
+    console.log('HANDLE DELETE => ' + this.state.name);
+    this.state.handleDelete(this.state.name);
+  }
+
+  updateCommandList() {
+    this.state.updateCommandList();
   }
 
   render() {
+    let editModalTrigger = <Button icon='edit' />;
+    let deleteModalTrigger = <Button negative icon='trash outline' />
+
+    let editModalContent = (
+      <CommandForm
+        fluid
+        name={this.state.name}
+        text={this.state.text}
+        newCommand={false}
+        updateCommandList={this.updateCommandList}
+      />
+    );
+
     return (
       <div className="Command" style={{
         padding: "1%",
@@ -51,14 +66,21 @@ class Command extends Component {
         <div className="buttonsSection" style={{
           width: "8vw",
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
           paddingTop: "1%",
           paddingBottom: "1%"
         }}>
-          <MyModal edit={true} name={this.state.name} text={this.state.text} updateClick={this.handleUpdateClick}/>
-          <MyModal delete={true} />
+          <MyModal trigger={editModalTrigger} content={editModalContent}/>
+          <div>
+            <Button negative onClick={this.handleDeleteClick} icon='trash outline'/>
+            <Confirm
+              open={this.state.showConfirmDelete}
+              onCancel={this.handleDeleteCancel}
+              onConfirm={this.handleDeleteConfirm}
+            />
+          </div>
         </div>
       </div>
     );

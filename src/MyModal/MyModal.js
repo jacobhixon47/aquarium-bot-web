@@ -1,0 +1,36 @@
+import React, { Component } from 'react';
+import {Modal, Header, Button, Icon} from 'semantic-ui-react';
+import CommandForm from '../CommandForm/CommandForm.js';
+import 'semantic-ui-css/semantic.min.css';
+import './MyModal.css';
+
+class MyModal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      trigger: props.trigger,
+      content: props.content
+    };
+    this.closeOnSave = this.closeOnSave.bind(this);
+  }
+
+  closeOnSave = () => {this.setState({modalOpen: false})};
+
+  render() {
+    let modalTrigger = this.state.trigger;
+    let content = this.state.content;
+    return (
+      <Modal
+        trigger={modalTrigger}
+        basic size='small'
+        closeIcon
+      >
+        <Modal.Content>
+          {content}
+        </Modal.Content>
+      </Modal>
+    );
+  }
+}
+
+export default MyModal;

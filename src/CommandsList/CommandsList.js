@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import CommandsForm from '../CommandsForm/CommandsForm.js';
+import {Button} from 'semantic-ui-react';
+import CommandForm from '../CommandForm/CommandForm.js';
 import Command from '../Command/Command.js';
-import MyModal from '../Modal/Modal.js';
+import MyModal from '../MyModal/MyModal.js';
 import fire from '../fire.js';
 import './CommandsList.css';
 
@@ -15,33 +16,18 @@ class CommandsList extends Component {
       username: "47aquarian",
       commands: []
     };
+    this.handleDelete = this.handleDelete.bind(this);
+    this.updateCommandList = this.updateCommandList.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
+
     this.commandsRef = fs.collection(`channels/${this.state.username}/commands`);
   }
-
-  handleDelete(name) {
-    console.log("deleting '" + name + "'");
-    this.commandsRef.where("name", "==", name)
-    .get()
-    .then(querySnapshot => {
-        querySnapshot.forEach((doc) => {
-          doc.ref.delete().then(() => {
-            console.log("Document successfully deleted!");
-          }).catch(function(error) {
-            console.error("Error removing document: ", error);
-          });
-        });
-    })
-    .catch(function(error) {
-        console.log("Error getting documents: ", error);
-    });
-
-  }
-
-  componentDidMount() {
+  updateCommandList() {
     this.commandsRef.onSnapshot(snapshot => {
+      console.log('recieved snapshot!');
       let prevCommands = [];
-      console.log("SNAPSHOT");
       snapshot.forEach(doc => {
+        console.log("Recieved ## " + doc.data().name + ' — ' + doc.data().text);
         prevCommands.push({
           name: doc.data().name,
           text: doc.data().text
@@ -50,10 +36,29 @@ class CommandsList extends Component {
       this.setState({
         commands: prevCommands
       });
+      console.log('updated commands list');
     });
   }
 
+  handleDelete(name) {
+    console.log("deleting '" + name.substr(1) + "'");
+    this.commandsRef.doc(name.substr(1)).delete()
+    .then(() => {
+      console.log("Document successfully deleted!");
+      // this.updateCommandList();
+    }).catch(function(error) {
+      console.error("Error removing document: ", error);
+    });
+  }
+
+  componentDidMount() {
+    this.updateCommandList();
+  }
+
   render() {
+    let createModalTrigger = <Button fluid icon='add' content='Add Command' />;
+    let createModalContent = <CommandForm name={this.state.name} text={this.state.text}
+      newCommand={true} updateCommandList={this.updateCommandList}/>;
     let commandsList = this.state.commands.map(command => {
       return (
         <Command
@@ -61,8 +66,8 @@ class CommandsList extends Component {
           name={command.name}
           text={command.text}
           id={command.id}
-          // handleEdit={this.handleEdit.bind(this)}
-          handleDelete={this.handleDelete.bind(this)}
+          handleDelete={this.handleDelete}
+          updateCommandList={this.updateCommandList}
         />
       );
     });
@@ -74,16 +79,11 @@ class CommandsList extends Component {
         alignItems: "flex-start",
         justifyContent: "space-around"
       }}>
-        <div style={{
-          textAlign: "left"
-        }}>
-          <h3>Commands</h3>
-          <MyModal create={true} />
+        <div className="commandsList">
+          <h3 style={{textAlign: 'center'}}>Commands</h3>
+          <MyModal trigger={createModalTrigger} content={createModalContent} closeIcon/>
           <div>{commandsList}</div>
         </div>
-        {/* <CommandsForm style={{
-          maxWidth: "50vw"
-        }}/> */}
       </div>
     );
   }
