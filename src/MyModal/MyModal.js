@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Modal} from 'semantic-ui-react';
-import 'semantic-ui-css/semantic.min.css';
 import './MyModal.css';
 
 class MyModal extends Component {
