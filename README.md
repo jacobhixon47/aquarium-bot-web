@@ -1,29 +1,43 @@
-# AquariumBot (web)
+# _AquariumBot (AquaBot)_
 
-## Version: 0.2.0
+#### _Twitch Chat Bot (Web), 0.2.0_
 
-AquariumBot, or "AquaBot", is a [simple Twitch chatbot](https://github.com/jacobhixon47/aquarium-bot-node) (GitHub).
+#### By _Jacob Hixon_
 
-This is the web UI for AquaBot.
+## Description
 
-#### Current Features
-- Add/Delete Commands (!example)
-- Utilizes `semantic-ui-react`
+A web application that allows a user to interact with the [AquariumBot Twitch Bot](https://github.com/jacobhixon47/aqua-bot-node). AquariumBot is a simple Twitch chat bot that will allow custom chat commands, timed announcements, random giveaways and more.
 
-#### Future Features
-- Edit Commands
-- User auth (currently just set to a single user for testing)
-- Timed events (call !command every x minutes, etc)
-- bot moderation/security (ban users for trolling/spamming, briefly mute for unauthorized url posting, etc)
-- Giveaway support
-- In-text code for commands (Example: `${twitch}.followers.count` etc)
-- Permission levels (admin, regular, etc.
-- Most likely more.
+## Setup/Installation Requirements
 
-## Version Notes
+1. _Clone into repository located at https://github.com/jacobhixon47/aqua-bot-web.git ._
+2. _In the terminal, make sure you are inside of the project folder, then type the following commands:_
+  * `$ yarn`
+  * `$ npm start`
+3. _visit localhost:3000 in your browser_
 
-#### 0.1.0
-- Basic Add/Delete Functionality
 
-#### 0.2.0
-- Implement `semantic-ui-react`([link](https://react.semantic-ui.com/))
+## Technologies Used
+
+* React
+* [semantic-ui-react](https://react.semantic-ui.com/)
+* [Firebase Cloud Firestore](https://firebase.google.com/docs/firestore/)
+
+### License
+
+This file is part of (AquariumBot).
+
+    (AquariumBot) is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    (AquariumBot) is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with the (AquariumBot). If not, see <http://www.gnu.org/licenses/>.
+
+Copyright (c) 2018 **_Jacob Hixon_**

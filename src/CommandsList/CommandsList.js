@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Button} from 'semantic-ui-react';
+import {Button, Icon} from 'semantic-ui-react';
 import CommandForm from '../CommandForm/CommandForm.js';
 import Command from '../Command/Command.js';
 import MyModal from '../MyModal/MyModal.js';
@@ -43,7 +43,11 @@ class CommandsList extends Component {
   }
 
   render() {
-    let createModalTrigger = <Button fluid icon='add' content='Add Command' />;
+    let createModalTriggerContent = (
+      <div>
+        <Icon name='add'/>Add Command
+      </div>
+    );
     let createModalContent = <CommandForm name={this.state.name} text={this.state.text}
       newCommand={true} updateCommandList={this.updateCommandList}/>;
     let commandsList = this.state.commands.map(command => {
@@ -67,7 +71,7 @@ class CommandsList extends Component {
       }}>
         <div className="commandsList">
           <h3 style={{textAlign: 'center'}}>Commands</h3>
-          <MyModal trigger={createModalTrigger} content={createModalContent} closeIcon/>
+          <MyModal triggerContent={createModalTriggerContent} content={createModalContent} closeIcon/>
           <div>{commandsList}</div>
         </div>
       </div>
