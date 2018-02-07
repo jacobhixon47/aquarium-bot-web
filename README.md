@@ -10,7 +10,7 @@ A web application that allows a user to interact with the [AquariumBot Twitch Bo
 
 ## Setup/Installation Requirements
 
-1. _Clone into repository located at https://github.com/jacobhixon47/aqua-bot-web.git ._
+1. _Clone into repository located at https://github.com/jacobhixon47/aquarium-bot-web.git ._
 2. _In the terminal, make sure you are inside of the project folder, then type the following commands:_
   * `$ yarn`
   * `$ npm start`
