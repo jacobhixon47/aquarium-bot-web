@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Button, Confirm, Icon} from 'semantic-ui-react';
 import MyModal from '../MyModal/index.js';
 import CommandForm from '../CommandForm/index.js';
-import fire from '../fire.js';
+import fire from '../../fire.js';
 import './style.css';
 
 let fs = fire.firestore();

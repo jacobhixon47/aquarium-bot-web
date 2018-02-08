@@ -3,7 +3,7 @@ import {Button, Icon} from 'semantic-ui-react';
 import CommandForm from '../CommandForm/index.js';
 import Command from '../Command/index.js';
 import MyModal from '../MyModal/index.js';
-import fire from '../fire.js';
+import fire from '../../fire.js';
 import './style.css';
 
 let fs = fire.firestore();

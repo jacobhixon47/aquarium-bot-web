@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Input, TextArea, Button } from 'semantic-ui-react';
-import fire from '../fire.js';
+import fire from '../../fire.js';
 import {firestore} from 'firebase/firestore';
 import './style.css';
 import 'semantic-ui-css/semantic.min.css';
