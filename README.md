@@ -11,10 +11,10 @@ A web application that allows a user to interact with the [AquariumBot Twitch Bo
 ## Setup/Installation Requirements
 
 1. _Clone into repository located at https://github.com/jacobhixon47/aquarium-bot-web.git ._
-2. _Type_ `$ yarn` _in  the root project directory_
+2. _Run_ `$ yarn install` _in  the root project directory_
 2. _Create a file named_ `apiKey.js` _in the_ `/src/` _directory_
 3. _Write_ `module.exports = "<YOUR FIREBASE API KEY>";` _in_ `/src/apiKey.js`
-5. _Type_ `$ npm start` _in the root project directory_
+5. _Run_ `$ npm start` _in the root project directory_
 3. _visit localhost:3000 in your browser_
 
 

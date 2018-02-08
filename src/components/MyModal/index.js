@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Modal, Button, Icon} from 'semantic-ui-react';
-import './MyModal.css';
+import './style.css';
 
 class MyModal extends Component {
   constructor(props) {
@@ -9,7 +9,8 @@ class MyModal extends Component {
       triggerContent: props.triggerContent,
       content: props.content,
       modalOpen: false,
-      handleClose: props.handleClose
+      handleClose: props.handleClose,
+      triggerIcon: props.icon
     };
     this.handleClose = this.handleClose.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
@@ -30,7 +31,11 @@ class MyModal extends Component {
   };
 
   render() {
-    let modalTrigger = <Button onClick={this.handleOpen}>{this.state.triggerContent}</Button>;
+    let modalTrigger = (
+      <Button onClick={this.handleOpen} icon={this.state.triggerIcon && this.state.triggerIcon}>
+        {this.state.triggerContent}
+      </Button>
+    )
     let content = this.state.content;
     return (
       <Modal

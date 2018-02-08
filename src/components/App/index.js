@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
-import CommandsList from './CommandsList/CommandsList.js';
+import './style.css';
+import CommandsList from '../CommandsList/index.js';
 import {Button, Sidebar, Menu, Icon, Segment} from 'semantic-ui-react';
 
 class App extends Component {

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import {Button, Confirm} from 'semantic-ui-react';
-import MyModal from '../MyModal/MyModal.js';
-import CommandForm from '../CommandForm/CommandForm.js';
+import {Button, Confirm, Icon} from 'semantic-ui-react';
+import MyModal from '../MyModal/index.js';
+import CommandForm from '../CommandForm/index.js';
 import fire from '../fire.js';
-import './Command.css';
+import './style.css';
 
 let fs = fire.firestore();
 fs.enablePersistence();
@@ -45,8 +45,11 @@ class Command extends Component {
   }
 
   render() {
-    let editModalTrigger = <Button icon='edit' />;
-
+    let confirmDeleteHeader = (
+      <h1>
+        &nbsp;<Icon name='trash outline'/>Delete Command
+      </h1>
+    );
     let editModalContent = (
       <CommandForm
         fluid
@@ -83,10 +86,13 @@ class Command extends Component {
           paddingTop: "1%",
           paddingBottom: "1%"
         }}>
-          <MyModal trigger={editModalTrigger} content={editModalContent} />
+          <MyModal content={editModalContent} icon='write'/>
           <div>
             <Button negative onClick={this.handleDeleteClick} icon='trash outline'/>
             <Confirm
+              header={confirmDeleteHeader}
+              content='Are you sure you want to delete this command?'
+              confirmButton='Delete'
               open={this.state.showConfirmDelete}
               onCancel={this.handleDeleteCancel}
               onConfirm={this.handleDeleteConfirm}

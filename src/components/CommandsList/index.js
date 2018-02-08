@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {Button, Icon} from 'semantic-ui-react';
-import CommandForm from '../CommandForm/CommandForm.js';
-import Command from '../Command/Command.js';
-import MyModal from '../MyModal/MyModal.js';
+import CommandForm from '../CommandForm/index.js';
+import Command from '../Command/index.js';
+import MyModal from '../MyModal/index.js';
 import fire from '../fire.js';
-import './CommandsList.css';
+import './style.css';
 
 let fs = fire.firestore();
 
@@ -64,7 +64,7 @@ class CommandsList extends Component {
     return (
       <div className="Commands" style={{
         padding: "1%",
-        width: "100vw",
+        width: "100%",
         height: 'auto',
         overflow: "scroll",
         display: "flex",
