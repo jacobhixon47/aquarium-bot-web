@@ -65,13 +65,15 @@ class CommandsList extends Component {
       <div className="Commands" style={{
         padding: "1%",
         width: "100vw",
+        height: 'auto',
+        overflow: "scroll",
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "space-around"
       }}>
         <div className="commandsList">
           <h3 style={{textAlign: 'center'}}>Commands</h3>
-          <MyModal triggerContent={createModalTriggerContent} content={createModalContent} closeIcon/>
+          <MyModal triggerContent={createModalTriggerContent} content={createModalContent} closeIcon />
           <div>{commandsList}</div>
         </div>
       </div>
