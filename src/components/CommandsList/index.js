@@ -66,7 +66,6 @@ class CommandsList extends Component {
         padding: "1%",
         width: "100%",
         height: 'auto',
-        overflow: "scroll",
         display: "flex",
         alignItems: "flex-start",
         justifyContent: "space-around"

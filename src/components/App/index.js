@@ -65,10 +65,11 @@ class App extends Component {
             </Sidebar>
             <Sidebar.Pusher>
               <Segment basic>
-                <Button onClick={this.handleMenuToggle} icon='content' style={{float: 'left'}}/>
+                <Button onClick={this.handleMenuToggle} icon='content' style={{
+                  float: 'left'
+                }}/>
                 <div style={{
-                  minHeight: '100vh',
-                  overflowY: 'scroll'
+                  height: '100vh'
                 }}>
                   {segmentContent}
                 </div>
